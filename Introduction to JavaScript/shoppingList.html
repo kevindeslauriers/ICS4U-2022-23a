@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+
+<body>
+   <section>
+      <p>Enter a new item: <input type="text" name="" id="desc"><button>Add item</button></p>
+   </section>
+   <ul id="shoppingList"></ul>
+</body>
+<script>
+   document.querySelector('section button').onclick =
+      () => {
+         const li = document.createElement('li');
+         const item = document.createElement('span');
+         const desc = document.querySelector('#desc').value;
+         item.textContent = desc;
+
+         const button = document.createElement('button');
+         button.textContent = 'Delete';
+         button.onclick = () => {
+            li.remove();
+         }
+         item.appendChild(button);
+
+         li.appendChild(item);
+         document.querySelector('#desc').value = '';
+         document.querySelector('ul').appendChild(li);
+      }
+</script>
+
+</html>
