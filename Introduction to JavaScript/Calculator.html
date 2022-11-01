@@ -50,7 +50,62 @@
       [0, '.', '-'],
       ['CLS', '=']
    ];
+   const calculator = document.querySelector('#calculator');
+   keypadNumbers.forEach(row => {
+      row.forEach(val => {
+         let key = document.createElement('span');
+         key.classList.add('key');
+         key.textContent = val;
 
+
+         key.onclick = () => {
+            let result = document.querySelector('#result');
+            if (val !== '=' && val !== 'CLS')
+               result.textContent += val;
+            else if (val === 'CLS')
+               result.textContent = '';
+            else if (val === '=') {
+               let expression = result.textContent;
+               let opIndex = operatorIndex(expression);
+               if (opIndex != -1) {
+                  let operand1 = Number(expression.substring(0, opIndex));
+                  let operand2 = Number(expression.substring(opIndex + 1));
+                  if (isNaN(operand1) || isNaN(operand2))
+                     result.textContent = 'ERROR';
+                  else {
+                     const op = expression.substring(opIndex, opIndex + 1);
+                     if (op === '+')
+                        result.textContent = operand1 + operand2;
+                     else if (op === '-')
+                        result.textContent = operand1 - operand2;
+                     else if (op === '*')
+                        result.textContent = operand1 * operand2;
+                     else
+                        result.textContent = operand1 / operand2;
+                  }
+
+               } else {
+                  result.textContent = 'ERROR';
+               }
+            }
+         }
+
+         if (val === 0 || val === 'CLS')
+            key.classList.add('wide-button-1');
+         if (val === '=')
+            key.classList.add('wide-button-2');
+
+         calculator.appendChild(key);
+      })
+   });
+
+   const result = document.createElement('span');
+   result.classList.add('result');
+   result.classList.add('key');
+   result.setAttribute('id', 'result');
+   result.textContent = '';
+
+   calculator.appendChild(result);
 
    function operatorIndex(exp) {
       if (exp.indexOf('+') >= 0)
