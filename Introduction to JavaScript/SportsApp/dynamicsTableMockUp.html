@@ -7,6 +7,11 @@
    <meta name="viewport" content="width=di, initial-scale=1.0">
    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
    <title>Document</title>
+   <style>
+      .sortable {
+         cursor: pointer;
+      }
+   </style>
 </head>
 
 <body>
@@ -15,10 +20,10 @@
       <table id="standings" class="table is-striped">
          <thead>
             <tr>
-               <th onclick="sort('Name');">Name</th>
+               <th class="sortable" onclick="sort('Name');">Name</th>
                <th>Wins</th>
                <th>Losses</th>
-               <th onclick="sort('PTS');">Points</th>
+               <th class="sortable" onclick="sort('PTS');">Points</th>
             </tr>
          </thead>
          <tbody></tbody>
@@ -27,10 +32,12 @@
 </body>
 
 <script>
-   const dataString = localStorage.getItem('teams');
-   /*'[{"Id":1,"Name":"Toronto","W":8,"L":3,"PTS":16},{"Id":2,"Name":"Montreal","W":5,"L":8,"PTS":10},{"Id":3,"Name":"New York","W":10,"L":3,"PTS":20},{"Id":4,"Name":"Buffalo","W":4,"L":9,"PTS":8},{"Id":5,"Name":"New Jersey","W":3,"L":7,"PTS":6}]';*/
+   const dataString = localStorage.getItem("teams");
+   /*
+         '[{"Id":1,"teamlogo":"1610612763","Name":"Toronto","W":8,"L":3,"PTS":16},{"Id":2,"Name":"Montreal","teamlogo":"1610612763","W":5,"L":8,"PTS":10},{"Id":3,"teamlogo":"1610612763","Name":"New York","W":10,"L":3,"PTS":20},{"Id":4,"teamlogo":"1610612763","Name":"Buffalo","W":4,"L":9,"PTS":8},{"Id":5,"Name":"New Jersey","teamlogo":"1610612763","W":3,"L":7,"PTS":6}]';
 
-   // localStorage.setItem("teams", dataString);
+
+      localStorage.setItem("teams", dataString);*/
 
    teams = JSON.parse(dataString);
 
@@ -43,9 +50,13 @@
       teams.forEach((team) => {
          const row = document.createElement('tr');
          let cell = document.createElement('td');
+
+         let logo = document.createElement('img');
+         logo.src = `https://cdn.nba.com/logos/nba/${team.teamlogo}/global/L/logo.svg`;
          let link = document.createElement('a');
          link.href = 'teams.html?id=' + team.Id;
          link.textContent = team.Name;
+         link.prepend(logo);
          cell.appendChild(link);
          row.appendChild(cell);
          cell = document.createElement('td');
