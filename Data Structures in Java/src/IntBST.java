@@ -37,11 +37,11 @@ public class IntBST {
 
    private void postOrderPrintTraversal(IntBSTNode root) {
       if (root.hasLeftChild()) {
-         preOrderPrintTraversal(root.getLeftChild());
+         postOrderPrintTraversal(root.getLeftChild());
       }
 
       if (root.hasRightChild()) {
-         preOrderPrintTraversal(root.getRightChild());
+         postOrderPrintTraversal(root.getRightChild());
       }
 
       System.out.println(root.getValue());
@@ -54,13 +54,13 @@ public class IntBST {
 
    private void inOrderPrintTraversal(IntBSTNode root) {
       if (root.hasLeftChild()) {
-         preOrderPrintTraversal(root.getLeftChild());
+         inOrderPrintTraversal(root.getLeftChild());
       }
 
       System.out.println(root.getValue());
 
       if (root.hasRightChild()) {
-         preOrderPrintTraversal(root.getRightChild());
+         inOrderPrintTraversal(root.getRightChild());
       }
 
    }
