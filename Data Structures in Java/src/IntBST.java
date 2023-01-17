@@ -6,6 +6,9 @@ public class IntBST {
    }
 
    public IntBSTNode add(Integer val) {
+      if (root == null) {
+         root = new IntBSTNode(val);
+      }
       return addRecursive(root, val);
    }
 
