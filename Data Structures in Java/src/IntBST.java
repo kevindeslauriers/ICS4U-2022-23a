@@ -9,6 +9,21 @@ public class IntBST {
       return addRecursive(root, val);
    }
 
+   public IntBSTNode find(Integer val) {
+      return findRecursive(root, val);
+   }
+
+   private IntBSTNode findRecursive(IntBSTNode root, Integer val) {
+      if (root.getValue() == val)
+         return root;
+      else if (root.hasLeftChild() && root.getValue() > val)
+         return findRecursive(root.getLeftChild(), val);
+      else if (root.hasRightChild() && root.getValue() < val)
+         return findRecursive(root.getRightChild(), val);
+      else
+         return null;
+   }
+
    /**
     * 
     * @param root root of the subtree we are adding val to
