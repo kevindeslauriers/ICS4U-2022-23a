@@ -13,6 +13,55 @@ public class IntBST {
       return findRecursive(root, val);
    }
 
+   public void preOrderPrintTraversal() {
+      preOrderPrintTraversal(root);
+   }
+
+   private void preOrderPrintTraversal(IntBSTNode root) {
+      System.out.println(root.getValue());
+      if (root.hasLeftChild()) {
+         preOrderPrintTraversal(root.getLeftChild());
+      }
+
+      if (root.hasRightChild()) {
+         preOrderPrintTraversal(root.getRightChild());
+      }
+   }
+
+   public void postOrderPrintTraversal() {
+      postOrderPrintTraversal(root);
+   }
+
+   private void postOrderPrintTraversal(IntBSTNode root) {
+      if (root.hasLeftChild()) {
+         preOrderPrintTraversal(root.getLeftChild());
+      }
+
+      if (root.hasRightChild()) {
+         preOrderPrintTraversal(root.getRightChild());
+      }
+
+      System.out.println(root.getValue());
+
+   }
+
+   public void inOrderPrintTraversal() {
+      inOrderPrintTraversal(root);
+   }
+
+   private void inOrderPrintTraversal(IntBSTNode root) {
+      if (root.hasLeftChild()) {
+         preOrderPrintTraversal(root.getLeftChild());
+      }
+
+      System.out.println(root.getValue());
+
+      if (root.hasRightChild()) {
+         preOrderPrintTraversal(root.getRightChild());
+      }
+
+   }
+
    private IntBSTNode findRecursive(IntBSTNode root, Integer val) {
       if (root.getValue() == val)
          return root;
